@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AIML & AI/ML Intro — HTML Examples</title>
+  <style>
+    body{font-family:Inter,system-ui,Segoe UI,Roboto,Arial;line-height:1.5;color:#0f172a;margin:0;padding:24px;background:#f8fafc}
+    .container{max-width:900px;margin:0 auto}
+    header{margin-bottom:20px}
+    h1{font-size:1.6rem;margin:0 0 4px}
+    p.lead{margin:0;color:#334155}
+    .card{background:white;border-radius:12px;padding:16px;margin:18px 0;box-shadow:0 6px 18px rgba(2,6,23,0.06)}
+    .code-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+    .filename{font-weight:600;color:#0f172a}
+    .btn{background:#0ea5a0;color:white;padding:6px 10px;border-radius:8px;border:0;cursor:pointer;font-weight:600}
+    pre{background:#0b1220;color:#e6eef8;padding:12px;border-radius:8px;overflow:auto;font-family:SFMono-Regular,Menlo,monospace;font-size:13px}
+    .meta{font-size:12px;color:#475569}
+    footer{font-size:13px;color:#475569;margin-top:18px}
+    .small{font-size:12px;color:#64748b}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>AIML (chatbot) & AI/ML Intro — ready HTML code</h1>
+      <p class="lead">Two examples included as code snippets you can copy: <strong>hello.aiml</strong> (AIML chatbot) and <strong>ai_ml_intro.py</strong> (simple ML script).</p>
+    </header>
+
+    <div class="card" id="aimlCard">
+      <div class="code-header">
+        <div>
+          <div class="filename">hello.aiml</div>
+          <div class="meta">AIML (Artificial Intelligence Markup Language) — simple pattern-based chatbot</div>
+        </div>
+        <div>
+          <button class="btn" onclick="copyCode('aimlCode')">Copy</button>
+        </div>
+      </div>
+
+      <pre id="aimlCode"><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;aiml version="2.0"&gt;
+  &lt;category&gt;
+    &lt;pattern&gt;HELLO&lt;/pattern&gt;
+    &lt;template&gt;
+      Hello! I'm a simple AIML bot. How can I help you today?
+    &lt;/template&gt;
+  &lt;/category&gt;
+
+  &lt;category&gt;
+    &lt;pattern&gt;WHAT IS YOUR NAME&lt;/pattern&gt;
+    &lt;template&gt;I am ChatBot-AIML. Nice to meet you!&lt;/template&gt;
+  &lt;/category&gt;
+
+  &lt;category&gt;
+    &lt;pattern&gt;BYE&lt;/pattern&gt;
+    &lt;template&gt;Goodbye! Have a great day.&lt;/template&gt;
+  &lt;/category&gt;
+
+  &lt;category&gt;
+    &lt;pattern&gt;MY NAME IS *&lt;/pattern&gt;
+    &lt;template&gt;Nice to meet you, &lt;star/&gt;! How can I assist?&lt;/template&gt;
+  &lt;/category&gt;
+&lt;/aiml&gt;
+</code></pre>
+      <div class="small">Tip: save this as <code>hello.aiml</code> and load it with an AIML interpreter (e.g., PyAIML).</div>
+    </div>
+
+    <div class="card" id="mlCard">
+      <div class="code-header">
+        <div>
+          <div class="filename">ai_ml_intro.py</div>
+          <div class="meta">Python — Tiny ML pipeline using scikit-learn (Iris dataset)</div>
+        </div>
+        <div>
+          <button class="btn" onclick="copyCode('mlCode')">Copy</button>
+        </div>
+      </div>
+
+      <pre id="mlCode"><code># ai_ml_intro.py
+"""
+Tiny AI/ML example: classify Iris dataset with logistic regression.
+Run: python ai_ml_intro.py
+"""
+
+import numpy as np
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
+
+# 1. Load data
+data = load_iris()
+X, y = data.data, data.target
+print("Classes:", data.target_names)
+
+# 2. Train/test split
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.25, random_state=42, stratify=y)
+
+# 3. Preprocess
+scaler = StandardScaler()
+X_train = scaler.fit_transform(X_train)
+X_test = scaler.transform(X_test)
+
+# 4. Model
+model = LogisticRegression(max_iter=200)
+model.fit(X_train, y_train)
+
+# 5. Evaluate
+y_pred = model.predict(X_test)
+print("Accuracy:", accuracy_score(y_test, y_pred))
+print(classification_report(y_test, y_pred))
+print("Confusion matrix:\n", confusion_matrix(y_test, y_pred))
+
+# Notes:
+# - Expand with cross-validation and hyperparameter tuning for better results.
+# - Save the trained model with joblib or pickle for deployment.
+</code></pre>
+      <div class="small">Tip: install dependencies with <code>pip install scikit-learn numpy</code> before running.</div>
+    </div>
+
+    <footer>
+      <div class="small">If you want, I can: 1) turn this into a downloadable HTML file, 2) add syntax highlighting, or 3) generate a full AIML bot with multiple topics. Tell me which.</div>
+    </footer>
+  </div>
+
+  <script>
+    function copyCode(id){
+      const el = document.getElementById(id);
+      const text = el.innerText;
+      navigator.clipboard.writeText(text).then(()=>{
+        const old = event.target.innerText;
+        event.target.innerText = 'Copied!';
+        setTimeout(()=> event.target.innerText = old,1200);
+      }).catch(()=> alert('Copy failed — select and copy manually.'))
+    }
+  </script>
+</body>
+</html>

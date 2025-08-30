@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="2.0">
+  <category>
+    <pattern>HELLO</pattern>
+    <template>
+      Hello! I'm a simple AIML bot. How can I help you today?
+    </template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR NAME</pattern>
+    <template>I am ChatBot-AIML. Nice to meet you!</template>
+  </category>
+
+  <category>
+    <pattern>BYE</pattern>
+    <template>Goodbye! Have a great day.</template>
+  </category>
+
+  <!-- A wildcard example -->
+  <category>
+    <pattern>MY NAME IS *</pattern>
+    <template>Nice to meet you, <star/>! How can I assist?</template>
+  </category>
+</aiml>
